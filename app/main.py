@@ -19,7 +19,6 @@ class BaseRobot:
         self.weight = weight
         self.coords = coords
 
-
     def go_forward(self, step: int = 1) -> None:
         self.coords[1] += step
 
