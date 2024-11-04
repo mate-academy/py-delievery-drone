@@ -18,16 +18,16 @@ class BaseRobot:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
     def go_forward(self, step: int = 1) -> None:
-        self.coords[1] = self.coords[1] + step
+        self.coords[1] += step
 
     def go_back(self, step: int = 1) -> None:
-        self.coords[1] = self.coords[1] - step
+        self.coords[1] -= step
 
     def go_right(self, step: int = 1) -> None:
-        self.coords[0] = self.coords[0] + step
+        self.coords[0] += step
 
     def go_left(self, step: int = 1) -> None:
-        self.coords[0] = self.coords[0] - step
+        self.coords[0] -= step
 
 
 class FlyingRobot(BaseRobot):
@@ -37,18 +37,17 @@ class FlyingRobot(BaseRobot):
             weight: int,
             coords: list = None,
     ) -> None:
-        coords = coords or [0, 0, 0]
         super().__init__(
             name,
             weight,
-            coords,
+            coords or [0, 0, 0],
         )
 
     def go_up(self, step: int = 1) -> None:
-        self.coords[2] = self.coords[2] + step
+        self.coords[2] += step
 
     def go_down(self, step: int = 1) -> None:
-        self.coords[2] = self.coords[2] - step
+        self.coords[2] -= step
 
 
 class DeliveryDrone(FlyingRobot):
@@ -58,12 +57,12 @@ class DeliveryDrone(FlyingRobot):
             weight: int,
             max_load_weight: int,
             current_load: Cargo = None,
-            coords: list = [0, 0, 0],
+            coords: list = None,
     ) -> None:
         super().__init__(
             name,
             weight,
-            coords,
+            coords or [0, 0, 0],
         )
         self.max_load_weight = max_load_weight
         self.current_load = current_load
