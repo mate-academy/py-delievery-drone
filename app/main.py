@@ -48,12 +48,12 @@ class FlyingRobot(BaseRobot):
         self.coords[2] -= step
 
 
-class DeliveryDrone(BaseRobot):
+class DeliveryDrone(FlyingRobot):
 
     def __init__(
         self, name: str, weight: int, coords: list[int] = None,
         max_load_weight: int = 0,
-        current_load: "Cargo" = None
+        current_load: Cargo | None = None
     ) -> None:
         if coords is None:
             coords = [0, 0, 0]
@@ -66,6 +66,8 @@ class DeliveryDrone(BaseRobot):
             self.hook_load(current_load)
 
     def hook_load(self, cargo: "Cargo") -> None:
+        if cargo is None:
+            return
         if self.current_load is None and cargo.weight <= self.max_load_weight:
             self.current_load = cargo
 
