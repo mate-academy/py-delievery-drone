@@ -6,3 +6,6 @@
 venv/
 .pytest_cache/
 **__pycache__/
+.vs/
+ProjectSettings.json
+PythonSettings.json
