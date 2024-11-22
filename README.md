@@ -68,6 +68,7 @@ cargo2 = Cargo(2)
 drone.hook_load(cargo2)
 # drone.current_load is cargo  
 # didn't hook cargo2, cargo already in current load
+
 ```
 ```python
 drone = DeliveryDrone(
