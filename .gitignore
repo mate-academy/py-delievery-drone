@@ -6,3 +6,4 @@
 venv/
 .pytest_cache/
 **__pycache__/
+/app/main.py_old
