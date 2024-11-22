@@ -135,36 +135,21 @@ def test_deliver_robot_has_attrs(kwargs, result):
 
 def test_deliver_robot_hook_load_cargo_is_not_heavy():
     cargo = Cargo(20)
-    drone = DeliveryDrone(
-        name="Mike",
-        weight=12,
-        max_load_weight=30,
-        current_load=None,
-    )
+    drone = DeliveryDrone(name="Mike", weight=12, max_load_weight=30, current_load=None)
     drone.hook_load(cargo)
     assert isinstance(drone.current_load, Cargo)
 
 
 def test_deliver_robot_hook_load_cargo_equals_max_load_weight():
     cargo = Cargo(20)
-    drone = DeliveryDrone(
-        name="Mike",
-        weight=12,
-        max_load_weight=20,
-        current_load=None,
-    )
+    drone = DeliveryDrone(name="Mike", weight=12, max_load_weight=20, current_load=None)
     drone.hook_load(cargo)
     assert isinstance(drone.current_load, Cargo)
 
 
 def test_deliver_robot_hook_load_cargo_is_too_heavy():
     cargo = Cargo(50)
-    drone = DeliveryDrone(
-        name="Mike",
-        weight=12,
-        max_load_weight=30,
-        current_load=None,
-    )
+    drone = DeliveryDrone(name="Mike", weight=12, max_load_weight=30, current_load=None)
     drone.hook_load(cargo)
     assert drone.current_load is None
 
@@ -172,23 +157,13 @@ def test_deliver_robot_hook_load_cargo_is_too_heavy():
 def test_deliver_robot_hook_load_cargo_current_load_isnt_none():
     cargo = Cargo(20)
     cargo2 = Cargo(12)
-    drone = DeliveryDrone(
-        name="Mike",
-        weight=12,
-        max_load_weight=30,
-        current_load=cargo2,
-    )
+    drone = DeliveryDrone(name="Mike", weight=12, max_load_weight=30, current_load=cargo2)
     drone.hook_load(cargo)
     assert drone.current_load is cargo2
 
 
 def test_deliver_robot_unhook_load():
-    drone = DeliveryDrone(
-        name="Mike",
-        weight=12,
-        max_load_weight=30,
-        current_load=Cargo(12),
-    )
+    drone = DeliveryDrone(name="Mike", weight=12, max_load_weight=30, current_load=Cargo(12))
     drone.unhook_load()
     assert drone.current_load is None
 
