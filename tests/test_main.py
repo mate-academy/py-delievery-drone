@@ -43,6 +43,7 @@ def test_base_robot_do_not_use_mutable_as_default():
     robot_1 = BaseRobot("", 1)
     robot_2 = BaseRobot("", 1)
     robot_1.go_forward(1)
+
     assert robot_2.coords == [0, 0]
 
 
