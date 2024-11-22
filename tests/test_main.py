@@ -103,7 +103,12 @@ def test_flying_robot_do_not_use_mutable_as_default():
     "kwargs,result",
     [
         (
-            {"name": "John", "weight": 50, "max_load_weight": 30, "current_load": None},
+            {
+                "name": "John",
+                "weight": 50,
+                "max_load_weight": 30,
+                "current_load": None,
+            },
             ("John", 50, 30, None, [0, 0, 0]),
         ),
         (
@@ -122,7 +127,13 @@ def test_deliver_robot_has_attrs(kwargs, result):
     robot = DeliveryDrone(**kwargs)
     assert all(
         hasattr(robot, attr)
-        for attr in ["name", "weight", "max_load_weight", "current_load", "coords"]
+        for attr in [
+            "name",
+            "weight",
+            "max_load_weight",
+            "current_load",
+            "coords",
+        ]
     )
     assert (
         robot.name,
@@ -223,11 +234,14 @@ def test_methods_declared_in_inherited_classes(class_, methods, length):
     ), f"Only {length} methods should be defined inside class '{class_.__name__}'"
     assert [
         parsed_class.body[0].body[it].name for it in range(length)
-    ] == methods, f"Only {methods} should be defined inside class '{class_.__name__}'"
+    ] == methods, (
+        f"Only {methods} should be defined inside class '{class_.__name__}'"
+    )
 
 
 def test_removed_comment():
     lines = inspect.getfile(main)
     assert "# write your code here" not in lines, (
-        "You have to" " remove the unnecessary comment '# write your code here'"
+        "You have to"
+        " remove the unnecessary comment '# write your code here'"
     )
