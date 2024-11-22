@@ -56,7 +56,7 @@ not greater than `max_load_weight` of the drone. Otherwise, do nothing.
 cargo = Cargo(14)
 drone = DeliveryDrone(
     name="Jim", 
-    weight=18, 
+    weight=18,
     coords=[11, -4, 16], 
     max_load_weight=20, 
     current_load=None,
