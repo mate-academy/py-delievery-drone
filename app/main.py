@@ -2,11 +2,11 @@ from __future__ import annotations
 
 
 class Cargo:
-    def __init__(self, weight: int) -> None:
+    def __init__(self, weight: int | float) -> None:
         self.weight = weight
 
 
-class BaseRobot():
+class BaseRobot:
     def __init__(self, name: str, weight: (int | float),
                  coords: list = None) -> None:
         if coords is None:
