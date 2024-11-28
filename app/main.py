@@ -96,7 +96,7 @@ print(drone.current_load is cargo)  # True
 
 cargo2 = Cargo(2)
 drone.hook_load(cargo2)
-print(drone.current_load is cargo)
+print(drone.current_load is cargo)  # True, cargo2 не загрузился, т.к. уже есть груз.
 
 drone.unhook_load()
 print(drone.current_load)  # None
