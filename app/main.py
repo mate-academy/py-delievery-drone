@@ -36,12 +36,11 @@ class DeliveryDrone(FlyingRobot):
                  weight: int,
                  coords: list = None,
                  max_load_weight: int = 0,
-                 current_load: int = None) -> None:
+                 current_load: None = None) -> None:
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
-        self.current_load = None  # Инициализация атрибута
+        self.current_load = None
 
-        # Проверка и установка текущего груза
         if current_load is not None:
             self.hook_load(current_load)
 
