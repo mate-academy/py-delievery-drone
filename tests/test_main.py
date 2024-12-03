@@ -87,7 +87,7 @@ def test_flying_robot_go():
     ],
 )
 def test_flying_robot_has_attrs(args, result):
-    robot = FlyingRobot(,
+    robot = FlyingRobot(*args)
     assert all([hasattr(robot, attr) for attr in ["name", "weight", "coords"]])
     assert (robot.name, robot.weight, robot.coords) == result
 

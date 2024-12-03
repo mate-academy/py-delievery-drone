@@ -7,8 +7,10 @@ class BaseRobot:
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = [0, 0]
+                 coords: list[int] = None
                  ) -> None:
+        if coords is None:
+            coords = [0, 0]
         self.name = name
         self.weight = weight
         self.coords = coords
@@ -33,8 +35,10 @@ class FlyingRobot(BaseRobot):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = [0, 0, 0]
+                 coords: list[int] = None
                  ) -> None:
+        if coords is None:
+            coords = [0, 0, 0]
         super().__init__(name, weight, coords)
 
     def go_up(self, step: int = 1) -> None:
@@ -48,41 +52,20 @@ class DeliveryDrone(FlyingRobot):
     def __init__(self,
                  name: str,
                  weight: int,
-                 coords: list[int] = [0, 0, 0],
+                 coords: list[int] = None,
                  max_load_weight: int = 0,
                  current_load: Cargo | None = None) -> None:
+        if coords is None:
+            coords = [0, 0, 0]
         super().__init__(name, weight, coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
 
     def hook_load(self, cargo: Cargo) -> None:
-        if self.current_load is None and self.max_load_weight >= cargo.weight:
-            self.current_load = cargo
+        if isinstance(cargo, Cargo):
+            if (self.current_load is None
+                    and self.max_load_weight >= cargo.weight):
+                self.current_load = cargo
 
     def unhook_load(self) -> None:
         self.current_load = None
-
-
-cargo = Cargo(14)
-drone = DeliveryDrone(
-    name="Jim",
-    weight=18,
-    coords=[11, -4, 16],
-    max_load_weight=20,
-    current_load=None,
-)
-drone.hook_load(cargo)
-# drone.current_load is cargo
-
-cargo2 = Cargo(2)
-drone.hook_load(cargo2)
-# drone.current_load is cargo
-# didn't hook cargo2, cargo already in current load
-drone = DeliveryDrone(
-    name="Jack",
-    weight=9,
-    max_load_weight=30,
-    current_load=Cargo(20),
-)
-drone.unhook_load()
-# drone.current_load is None
