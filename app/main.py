@@ -24,11 +24,7 @@ class BaseRobot:
         self.coords[0] -= step
 
     def get_info(self) -> str:
-        return (
-            f"Robot: {self.name}, "
-            f"Weight: {self.weight}, "
-            f"Coordinates: ({self.coords[0]}, {self.coords[1]})"
-        )
+        return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
@@ -57,7 +53,12 @@ class DeliveryDrone(FlyingRobot):
         self.max_load_weight = max_load_weight
         self.current_load = None
         if current_load:
-            self.hook_load(current_load)
+            if current_load.weight <= self.max_load_weight:
+                self.hook_load(current_load)
+            else:
+                raise ValueError(
+                    f"Cannot hook load: cargo weight {current_load.weight} exceeds max load weight {self.max_load_weight}"
+                )
 
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
