@@ -22,7 +22,7 @@ class BaseRobot:
         self.coords[0] -= step
 
     def get_info(self) -> str:
-        return f"Robot: {self.name}, Weight: {self.weight}"
+        return f"Robot: {self.name}, Weight: {self.weight}, Coords: {self.coords}"
 
 
 class FlyingRobot(BaseRobot):
@@ -50,7 +50,7 @@ class DeliveryDrone(FlyingRobot):
         weight: int,
         max_load_weight:
         int,
-        current_load: int,
+        current_load: bool=None,
         coords: list = (0, 0, 0)
     ) -> None:
         super().__init__(name, weight, coords)
