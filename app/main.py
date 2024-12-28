@@ -26,6 +26,7 @@ class BaseRobot:
     def get_info(self) -> str:
         return f"Robot: {self.name}, Weight: {self.weight}"
 
+
 class FlyingRobot(BaseRobot):
     def __init__(self, name: str, weight: int,
                  coords: list[int] | None = None) -> None:
