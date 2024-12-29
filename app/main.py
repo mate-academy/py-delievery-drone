@@ -29,15 +29,10 @@ class BaseRobot:
 
 
 class FlyingRobot(BaseRobot):
-    def __init__(self, name: str,
-                 weight: int,
-                 coords: list = [0, 0, 0]) -> None:
-        if len(coords) == 3:
-            super().__init__(name, weight, coords[:2])
-            self.coords.append(coords[2])
-        else:
-            super().__init__(name, weight, coords)
-            self.coords.append(0)
+    def __init__(self, name: str, weight: float, coords: list = None) -> None:
+        if coords is None:
+            coords = [0, 0, 0]
+        super().__init__(name=name, weight=weight, coords=coords)
 
     def go_up(self, step: int = 1) -> None:
         self.coords[2] += step
@@ -47,17 +42,28 @@ class FlyingRobot(BaseRobot):
 
 
 class DeliveryDrone(FlyingRobot):
-    def __init__(self, name: str, weight: int,
-                 coords: list = [0, 0, 0],
-                 max_load_weight: int = 0,
-                 current_load: Cargo = None) -> None:
-        super().__init__(name, weight, coords)
+    def __init__(self, name: str, weight: float,
+                 max_load_weight: float,
+                 current_load: object = None,
+                 coords: list = None) -> None:
+        super().__init__(name=name, weight=weight, coords=coords)
         self.max_load_weight = max_load_weight
         self.current_load = current_load
+
+        # Hook load if current_load is not None
+        if self.current_load is not None:
+            self.hook_load(self.current_load)
 
     def hook_load(self, cargo: Cargo) -> None:
         if self.current_load is None and cargo.weight <= self.max_load_weight:
             self.current_load = cargo
+            print(f"Cargo {cargo} hooked successfully.")
+        else:
+            print(f"Cannot hook cargo {cargo}.")
 
     def unhook_load(self) -> None:
-        self.current_load = None
+        if self.current_load is not None:
+            print(f"Unhooked cargo {self.current_load}.")
+            self.current_load = None
+        else:
+            print("No cargo to unhook.")
