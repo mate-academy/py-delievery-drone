@@ -54,7 +54,8 @@ class DeliveryDrone(FlyingRobot):
                 print(
                     f"Cannot hook load: Cargo weight"
                     f" {cargo.weight}"
-                    f" exceeds maximum load weight {self.max_load_weight}.")
+                    f" exceeds maximum "
+                    f"load weight {self.max_load_weight}.")
         else:
             print("Cannot hook load: A load is already hooked.")
 
