@@ -22,7 +22,11 @@ class BaseRobot:
         self.coords[0] -= rew
 
     def get_info(self) -> str:
-        return f"Robot: {self.name}, Weight: {self.weight}"
+        if self.coords != [0, 0]:
+            return (f"Robot: {self.name}, "
+                    f"Weight: {self.weight}, Coordinates: {self.coords}")
+        else:
+            return f"Robot: {self.name}, Weight: {self.weight}"
 
 
 class FlyingRobot(BaseRobot):
