@@ -28,3 +28,18 @@ class BaseRobot:
 
     def get_info(self) -> None:
         print(f"Robot: {self.name}, Weight: {self.weight}")
+
+class FlyingRobot(BaseRobot):
+    def __init__(
+            self,
+            name: str,
+            weight: int,
+            coords: list | None = None
+    ) -> None:
+        super().__init__(name, weight, coords=coords or [0, 0, 0])
+
+    def go_up(self, step: int = 1) -> None:
+        self.coords[2] += step
+
+    def go_down(self, step: int = 1) -> None:
+        self.coords[2] -= step
