@@ -77,6 +77,5 @@ class DeliveryDrone(FlyingRobot):
         elif luggage.weight > self.max_load_weight:
             self.unhook_load()
 
-
-    def unhook_load(self):
+    def unhook_load(self) -> None:
         self.current_load = None
